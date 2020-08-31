@@ -7,7 +7,7 @@ def get_bag_of_words(titles_lines):
     for line in titles_lines[1:]:
         courseid, course_bag_of_words = get_course_bag_of_words(line)
         for word in course_bag_of_words:
-            if word not in course_bag_of_words:
+            if word not in bag_of_words:
                 bag_of_words[word] = course_bag_of_words[word]
             else:
                 bag_of_words[word] += course_bag_of_words[word]
