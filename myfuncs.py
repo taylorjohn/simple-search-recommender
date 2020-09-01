@@ -7,6 +7,7 @@ def get_bag_of_words(titles_lines):
     for line in titles_lines[1:]:
         courseid, course_bag_of_words = get_course_bag_of_words(line)
         for word in course_bag_of_words:
+            # should check in bag_of_words
             if word not in bag_of_words:
                 bag_of_words[word] = course_bag_of_words[word]
             else:
@@ -29,7 +30,6 @@ def get_course_bag_of_words(line):
                 course_bag_of_words[word] += 1
 
     return courseid, course_bag_of_words
-
 
 def get_sorted_results(d):
     kv_list = d.items()
@@ -82,7 +82,7 @@ def get_search_results(query_terms, keywords, inverted_index):
                     search_results[courseid] = 0.0
                 search_results[courseid] += (
                         1 / float(keywords[courseid].index(term) + 1) *
-                        1 / float(query_terms(term) + 1)
+                        1 / float(query_terms.index(term) + 1)
                 )
     sorted_results = get_sorted_results(search_results)
     return sorted_results
@@ -117,7 +117,7 @@ def get_unit_vectors(keywords, categories_lines):
                     norm
             )
         unit_vectors[courseid] = u
-    return get_unit_vectors
+    return unit_vectors
 
 
 def get_dot_product(courseid1, courseid2, unit_vectors):
